@@ -1,0 +1,169 @@
+[{
+        "id": "aa42f8db.bbf988",
+        "type": "tab",
+        "label": "Camera Control (Object Storage)"
+    },
+    {
+        "id": "c58b5b2c.cad388",
+        "type": "camerapi-takephoto",
+        "z": "aa42f8db.bbf988",
+        "filemode": "2",
+        "filename": "",
+        "filedefpath": "1",
+        "filepath": "",
+        "fileformat": "jpeg",
+        "resolution": "2",
+        "rotation": "0",
+        "fliph": "0",
+        "flipv": "0",
+        "brightness": "50",
+        "contrast": "0",
+        "sharpness": "0",
+        "imageeffect": "none",
+        "name": "Take Photo",
+        "x": 299,
+        "y": 247.5,
+        "wires": [
+            [
+                "67465f3a.37cb9"
+            ]
+        ]
+    },
+    {
+        "id": "de7f15a0.54b838",
+        "type": "inject",
+        "z": "aa42f8db.bbf988",
+        "name": "Test",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "c58b5b2c.cad388"
+            ]
+        ]
+    },
+    {
+        "id": "978a7309.442f7",
+        "type": "debug",
+        "z": "aa42f8db.bbf988",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "530c3b42.bd6854",
+        "type": "wiotp out",
+        "z": "aa42f8db.bbf988",
+        "authType": "d",
+        "qs": "false",
+        "qsDeviceId": "",
+        "deviceKey": "c01bcd8a.8d54d",
+        "deviceType": "",
+        "deviceId": "",
+        "event": "camera",
+        "format": "json",
+        "qos": "",
+        "name": "Camera Event",
+        "x": 760,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "1066798b.84e316",
+        "type": "wiotp in",
+        "z": "aa42f8db.bbf988",
+        "authType": "d",
+        "deviceKey": "c01bcd8a.8d54d",
+        "deviceType": "",
+        "deviceId": "",
+        "command": "camera",
+        "commandType": "g",
+        "qos": 0,
+        "name": "Camera Cmd",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "c58b5b2c.cad388",
+                "978a7309.442f7"
+            ]
+        ]
+    },
+    {
+        "id": "67465f3a.37cb9",
+        "type": "os-put",
+        "z": "aa42f8db.bbf988",
+        "name": "ObjectStorage Upload",
+        "container": "visual-recognition-images",
+        "objectname": "",
+        "objectmode": "0",
+        "imageformat": "png",
+        "audioformat": "wav",
+        "filepath": "",
+        "filename": "",
+        "formattype": "0",
+        "mode": "0",
+        "osconfig": "373bf52a.0622ea",
+        "x": 507.5,
+        "y": 248,
+        "wires": [
+            [
+                "226b1c12.5e5f64",
+                "978a7309.442f7"
+            ]
+        ]
+    },
+    {
+        "id": "226b1c12.5e5f64",
+        "type": "function",
+        "z": "aa42f8db.bbf988",
+        "name": "Format Event",
+        "func": "var json = { \"url\": msg.url, \"objectname\": msg.objectname, \"containername\": \"visual-recognition-images\"};\nmsg.payload = JSON.stringify(json);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "530c3b42.bd6854",
+                "978a7309.442f7"
+            ]
+        ]
+    },
+    {
+        "id": "c01bcd8a.8d54d",
+        "type": "wiotp-credentials",
+        "z": "",
+        "name": "raspberrypi",
+        "org": "h50q99",
+        "serverName": "h50q99.messaging.internetofthings.ibmcloud.com",
+        "devType": "raspberrypi",
+        "devId": "pi-1111222233334444",
+        "keepalive": "",
+        "cleansession": false,
+        "tls": "",
+        "usetls": false
+    },
+    {
+        "id": "373bf52a.0622ea",
+        "type": "os-config",
+        "z": "",
+        "cfgtype": "api",
+        "region": "dallas",
+        "projectId": "575b06c4e4c349fe98179fcd171bcd30",
+        "userId": "cd8acdc2be764a379334a77dc3de9337",
+        "userName": "admin_f9eb44ba0a0f2d105b4307ba06bcae9d4a786043",
+        "password": "F~3i*ctQCCUnMKS3",
+        "name": ""
+    }
+]

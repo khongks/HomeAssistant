@@ -1,0 +1,178 @@
+[
+    {
+        "id": "9c4f9969.f446e8",
+        "type": "tab",
+        "label": "LED Control"
+    },
+    {
+        "id": "7a95b743.6fafd8",
+        "type": "debug",
+        "z": "9c4f9969.f446e8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 410,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "101de312.815815",
+        "type": "rpi-neopixels",
+        "z": "9c4f9969.f446e8",
+        "name": "NeoPixel LED",
+        "pixels": "1",
+        "bgnd": "",
+        "fgnd": "",
+        "wipe": "40",
+        "mode": "pcent",
+        "rgb": "rgb",
+        "x": 640,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "83179bcb.ef2e28",
+        "type": "wiotp in",
+        "z": "9c4f9969.f446e8",
+        "authType": "d",
+        "deviceKey": "c01bcd8a.8d54d",
+        "deviceType": "",
+        "deviceId": "",
+        "command": "light",
+        "commandType": "g",
+        "qos": "0",
+        "name": "Light Cmd",
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "7a95b743.6fafd8",
+                "1773b5ac.25ebc2"
+            ]
+        ]
+    },
+    {
+        "id": "1773b5ac.25ebc2",
+        "type": "function",
+        "z": "9c4f9969.f446e8",
+        "name": "Decide Intent",
+        "func": "action = msg.payload.action\nobject = msg.payload.object\nintent = msg.payload.intent\n\nif (intent == \"OnLight\") {\n    msg.payload = \"#ffffff\"\n    return [msg, null]\n} else if (intent == \"OffLight\") {\n    msg.payload = \"#000000\"\n    return [null, msg];\n}\nreturn msg;",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 410,
+        "y": 140,
+        "wires": [
+            [
+                "101de312.815815",
+                "d7e53891.023da8"
+            ],
+            [
+                "101de312.815815",
+                "befa8c37.792458"
+            ]
+        ]
+    },
+    {
+        "id": "1e36528d.cd2625",
+        "type": "wiotp out",
+        "z": "9c4f9969.f446e8",
+        "authType": "d",
+        "qs": "false",
+        "qsDeviceId": "",
+        "deviceKey": "c01bcd8a.8d54d",
+        "deviceType": "",
+        "deviceId": "",
+        "event": "light",
+        "format": "json",
+        "qos": "",
+        "name": "Light Event",
+        "x": 810,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d7e53891.023da8",
+        "type": "function",
+        "z": "9c4f9969.f446e8",
+        "name": "Format Status On",
+        "func": "var jsonObj = { \"dev\":\"light\", \"status\": \"on\"};\nmsg.payload = JSON.stringify(jsonObj)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "1e36528d.cd2625"
+            ]
+        ]
+    },
+    {
+        "id": "befa8c37.792458",
+        "type": "function",
+        "z": "9c4f9969.f446e8",
+        "name": "Format Status Off",
+        "func": "var jsonObj = { \"dev\":\"light\", \"status\": \"off\"};\nmsg.payload = JSON.stringify(jsonObj)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "1e36528d.cd2625"
+            ]
+        ]
+    },
+    {
+        "id": "d7f33f5a.e80dc",
+        "type": "inject",
+        "z": "9c4f9969.f446e8",
+        "name": "Test On",
+        "topic": "",
+        "payload": "#ffffff",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "101de312.815815"
+            ]
+        ]
+    },
+    {
+        "id": "e67171ed.22f1f",
+        "type": "inject",
+        "z": "9c4f9969.f446e8",
+        "name": "Test Off",
+        "topic": "",
+        "payload": "#000000",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "101de312.815815"
+            ]
+        ]
+    },
+    {
+        "id": "c01bcd8a.8d54d",
+        "type": "wiotp-credentials",
+        "z": "",
+        "name": "raspberrypi",
+        "org": "h50q99",
+        "serverName": "h50q99.messaging.internetofthings.ibmcloud.com",
+        "devType": "raspberrypi",
+        "devId": "pi-1111222233334444",
+        "keepalive": "",
+        "cleansession": false,
+        "tls": "",
+        "usetls": false
+    }
+]

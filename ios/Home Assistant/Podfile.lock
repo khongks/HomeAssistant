@@ -1,0 +1,38 @@
+PODS:
+  - BluemixObjectStorage (1.0.0):
+    - BMSCore (~> 2.0)
+  - BMSAnalyticsAPI (2.2.0)
+  - BMSCore (2.3.1):
+    - BMSAnalyticsAPI (~> 2.2)
+  - CocoaAsyncSocket (7.5.1):
+    - CocoaAsyncSocket/GCD (= 7.5.1)
+  - CocoaAsyncSocket/GCD (7.5.1)
+  - CocoaMQTT (1.0.11):
+    - CocoaAsyncSocket (~> 7.5.1)
+    - MSWeakTimer (~> 1.1.0)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - MSWeakTimer (1.1.0)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - BluemixObjectStorage
+  - CocoaMQTT
+  - JSQMessagesViewController
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  BluemixObjectStorage: b53cd65e04694f2b6d3cda6b764037fe99b2ee7e
+  BMSAnalyticsAPI: 2dae02bc3321b944ae947a7d2f0f009d8035f8e7
+  BMSCore: 59a1a6769d398f55b8bd83be647e084812b924e0
+  CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
+  CocoaMQTT: 41a67eab08a8c8aa3c0be6f55ef2f4ace197f193
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  MSWeakTimer: 9426150f933b80ed3acf3f6d228e4b61f0e303c8
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 3c96a3fcf52b39ff5109655667b0ab2e6f209f7d
+
+COCOAPODS: 1.2.0
