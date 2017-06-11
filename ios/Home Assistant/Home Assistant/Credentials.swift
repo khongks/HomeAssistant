@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BluemixObjectStorage
 
 struct Credentials {
   static let TextToSpeechUsername = "13c9e287-2535-490c-90e9-39c99273f0b8"
@@ -31,6 +32,7 @@ struct Credentials {
   static let DevId = "pi-1111222233334444"
   static let DevType = "raspberrypi"
   
+  static let ObjectStorageRegion = ObjectStorage.Region.Dallas
   static let ObjectStorageProjectId = "575b06c4e4c349fe98179fcd171bcd30"
   static let ObjectStorageUserId = "cd8acdc2be764a379334a77dc3de9337"
   static let ObjectStorageUsername = "admin_f9eb44ba0a0f2d105b4307ba06bcae9d4a786043"

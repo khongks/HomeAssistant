@@ -13,10 +13,11 @@ import BluemixObjectStorage
 extension ViewController {
   
   func setupObjectStorage() {
+    print("Region: \(Credentials.ObjectStorageRegion)")
     self.objectStorage = ObjectStorage(projectId: Credentials.ObjectStorageProjectId)
     objectStorage.connect(userId: Credentials.ObjectStorageUserId,
                           password: Credentials.ObjectStoragePassword,
-                          region: ObjectStorage.Region.Dallas) {
+                          region: Credentials.ObjectStorageRegion) {
                             error in
                             if let error = error {
                               print("objectstorage connect error :: \(error)")
